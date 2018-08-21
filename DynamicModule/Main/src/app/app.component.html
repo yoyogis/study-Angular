@@ -1,18 +1,10 @@
 <div>
   Main
 </div>
-<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" *ngFor="let module of installedModules$ | async">
-  <div class="card">
-      <div class="card-header">
-          {{ module.moduleName }}
-      </div>
-      <div class="card-block">                   
-          {{ module.description }} 
-      </div>
-      <div class="card-footer">
-              <button class="btn btn-primary" (click)="enableModule(module)">Enable</button>
-      </div>
-  </div>
+<h5>创建组件：</h5>
+<div dssPlugin component="script" [filter]="{id:'JHGFDTYUIEJHYD'}"></div>
+<h5>获取参数值：</h5>
+<div dssPlugin type="value" [valueFields]="['type','parameters.name','parameters.inputDataset']" 
+    (values)="values=$event" [filter]="{'parameters.code':'myrecipe'}">
+    {{values|json}}
 </div>
-<ng-template  #vc></ng-template>
-

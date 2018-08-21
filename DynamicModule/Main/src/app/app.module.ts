@@ -1,21 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ModuleService } from './services/module.service';
-import { RouterService } from './services/router.service';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { PluginDirective } from './plugin.directive';
+import { ModuleService } from './remote-module/module.service';
+import { RemoteModuleModule } from './remote-module/remote-module.module';
+
+export function startupServiceFactory(startupService: ModuleService): Function {
+  return () => startupService.load();
+}
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PluginDirective
+    AppComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    RemoteModuleModule,
     RouterModule.forRoot([
       {
         path: '', redirectTo:"", pathMatch:"full"
@@ -23,7 +26,13 @@ import { PluginDirective } from './plugin.directive';
     ]
     )
   ],
-  providers: [ModuleService, RouterService],
+  providers: [ModuleService, {
+    // Provider for APP_INITIALIZER
+      provide: APP_INITIALIZER,
+      useFactory: startupServiceFactory,
+      deps: [ModuleService],
+      multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

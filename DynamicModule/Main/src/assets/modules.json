@@ -1,10 +1,30 @@
 [
     {
-        "id":"HGFDSFGHJK",
-        "path": "MyRecipeModule",
-        "location": "./ext/my-recipe.umd.js",
-        "moduleName": "MyRecipeModule",
-        "description": "My Recipe Module",
-        "registered": true
-    }
+            "id":"JHGFDTYUIEJHYD",
+            "type":"Recipe",
+            "moduleName": "MyRecipeModule",
+            "location":"./ext/my-recipe.umd.js",
+            "parameters":{
+                "code":"myrecipe",
+                "name":"My Recipe",
+                "defaultIcon":"asset/myrecipe.svg",
+                "inputDataset":{
+                    "count":1
+                },
+                "outputDataset":{
+                    "count":1
+                },
+                "overview":"default",
+                "datasetIO":{
+                    "component":"default",
+                    "parameters":{
+                        "haveInputDataset":false
+                    }
+                },
+                "script":"lib-MyRecipe",
+                "advance":"default"
+            }
+        }
+    
 ]
+
