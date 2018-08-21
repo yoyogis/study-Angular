@@ -22,6 +22,12 @@
       ],
       "MyRecipe/*": [
         "dist/my-recipe/*"
+      ],
+      "AnotherRecipe": [
+        "dist/another-recipe"
+      ],
+      "AnotherRecipe/*": [
+        "dist/another-recipe/*"
       ]
     }
   }

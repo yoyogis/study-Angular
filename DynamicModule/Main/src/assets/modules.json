@@ -24,6 +24,31 @@
                 "script":"lib-MyRecipe",
                 "advance":"default"
             }
+        },
+        {
+            "id":"JHGFDTYUIEJHY1",
+            "type":"Recipe",
+            "moduleName": "AnotherRecipeModule",
+            "location":"./ext/another-recipe.umd.js",
+            "parameters":{
+                "code":"anotherrecipe",
+                "name":"lib-AnotherRecipe",
+                "defaultIcon":"asset/myrecipe.svg",
+                "inputDataset":{
+                    "count":1
+                },
+                "outputDataset":{
+                    "count":1
+                },
+                "overview":"default",
+                "datasetIO":{
+                    "component":"default",
+                    "parameters":{
+                        "haveInputDataset":false
+                    }
+                },
+                "script":"lib-AnotherRecipe"
+            }
         }
     
 ]

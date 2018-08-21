@@ -3,6 +3,7 @@
 </div>
 <h5>创建组件：</h5>
 <div dssPlugin component="script" [filter]="{id:'JHGFDTYUIEJHYD'}"></div>
+<div dssPlugin component="script" [filter]="{'parameters.code':'anotherrecipe'}"></div>
 <h5>获取参数值：</h5>
 <div dssPlugin type="value" [valueFields]="['type','parameters.name','parameters.inputDataset']" 
     (values)="values=$event" [filter]="{'parameters.code':'myrecipe'}">

@@ -156,6 +156,46 @@
           }
         }
       }
+    },
+    "AnotherRecipe": {
+      "root": "projects/another-recipe",
+      "sourceRoot": "projects/another-recipe/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/another-recipe/tsconfig.lib.json",
+            "project": "projects/another-recipe/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/another-recipe/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/another-recipe/src/test.ts",
+            "tsConfig": "projects/another-recipe/tsconfig.spec.json",
+            "karmaConfig": "projects/another-recipe/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/another-recipe/tsconfig.lib.json",
+              "projects/another-recipe/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "SubA"
