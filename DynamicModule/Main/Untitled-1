@@ -1,0 +1,21 @@
+[
+{
+    "id":"JHGFDTYUIEJHYD",
+    "type":"Recipe",
+    "module":"assets/extmodules/JHGFDTYUIEJHYD/MyRecipe.umd.js",
+    "parameters":{
+        "name":"My Recipe",
+        "defaultIcon":"asset/myrecipe.svg",
+        "inputDataset":{
+            "count":1
+        },
+        "outputDataset":{
+            "count":1
+        },
+        "overview":"default", 
+        "datasetIO":"MyRecipeIOComponent", 
+        "script":"MyRecipeScriptComponent", 
+        "advance":"default", 
+    }
+}
+]

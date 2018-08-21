@@ -1,0 +1,10 @@
+[
+    {
+        "id":"HGFDSFGHJK",
+        "path": "MyRecipeModule",
+        "location": "./ext/my-recipe.umd.js",
+        "moduleName": "MyRecipeModule",
+        "description": "My Recipe Module",
+        "registered": true
+    }
+]

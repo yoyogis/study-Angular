@@ -1,0 +1,9 @@
+{
+    "/ext":{
+        "target":"http://localhost:4433/",
+        "changeOrigin":true,
+        "pathRewrite":{
+            "^/ext":"/assets"
+        }
+    }
+}
