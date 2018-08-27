@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json --port 5566",
+    "start": "ng serve --proxy-config proxy.config.json --port 5566 --live-reload false",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,6 +22,7 @@
     "@angular/router": "^6.0.0",
     "@clr/angular": "^0.12.9",
     "core-js": "^2.5.4",
+    "ng-zorro-antd": "^1.4.0",
     "rxjs": "^6.0.0",
     "systemjs": "^0.21.4",
     "zone.js": "^0.8.26"

@@ -11,7 +11,6 @@ import { ModuleService } from './remote-module/module.service';
 })
 export class AppComponent {
   title = 'app';
-  values:any;
 
   constructor(){
 

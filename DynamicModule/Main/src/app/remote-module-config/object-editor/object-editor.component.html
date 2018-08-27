@@ -1,0 +1,30 @@
+<ul>
+    <li *ngFor="let item of parameters|keyvalue">
+        <span style="margin-right:5px">{{item.key}}</span>
+        <span *ngIf="item.value.type">
+            <ng-container [ngSwitch]="item.value.type">
+                    <span *ngSwitchCase="'component'">
+                        <nz-select style="width: 120px;" [(ngModel)]="item.value.value" placeholder="请选择组件">
+                            <nz-option *ngFor="let item of components"  [nzValue]="item" [nzLabel]="item"></nz-option>
+                        </nz-select>
+                    </span>
+                    <span *ngSwitchCase="'boolean'">
+                        <nz-select style="width: 120px;" [(ngModel)]="item.value.value" placeholder="请选择">
+                            <nz-option [nzValue]="true" [nzLabel]="true"></nz-option>
+                            <nz-option [nzValue]="false" [nzLabel]="false"></nz-option>
+                        </nz-select>
+                    </span>
+                    <span *ngSwitchCase="'string'">
+                        <input nz-input style="width: 120px;" [(ngModel)]="item.value.value" placeholder="输入字符串">
+                    </span>
+                    <span *ngSwitchCase="'number'">
+                        <nz-input-number [(ngModel)]="item.value.value" [nzPlaceHolder]="'请输入数字'"></nz-input-number>
+                    </span>
+                    <span *ngSwitchDefault>错误的类型{{item.value.type}}</span>
+                </ng-container>
+            </span>
+        <ng-container *ngIf="!item.value.type&&item.value">
+            <object-editor [parameters]="item.value" [components]="components"></object-editor>
+        </ng-container>
+    </li>
+</ul>

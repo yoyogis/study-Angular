@@ -1,0 +1,45 @@
+//多个module会同时被加载，所以需要过滤处合适的那个
+//要注意，以module为加载单元，一个module中包含多个不同扩展点的集合，而不是同一个扩展点不同的实现
+//针对同一份数据，选择用不同module的组件来展示，所以得过滤出需要的module
+[
+    {
+        "id":"JHGFDTYUIEJHYD",
+        "type":"Recipe",
+        "module":"assets/extmodules/JHGFDTYUIEJHYD/MyRecipe.umd.js",
+        "extentionPoints":[
+            {
+                "id":"code",
+                "type":"",
+                "value":"myrecipe"
+            },
+            {
+                "id":"overview",
+                "componentClass":"MyRecipeOverviewComponent"
+            },
+            {
+                "id":"script",
+                "componentClass":"MyRecipeScriptComponent"
+            }
+        ]
+    },
+    {
+        "id":"VBNMCVBNVCXCVB",
+        "type":"Recipe",
+        "module":"assets/extmodules/JHGFDTYUIEJHYD/AnotherRecipe.umd.js",
+        "extentionPoints":[
+            {
+                "id":"code",
+                "type":"",
+                "value":"myrecipe"
+            },
+            {
+                "id":"overview",
+                "componentClass":"MyRecipeOverviewComponent"
+            },
+            {
+                "id":"script",
+                "componentClass":"MyRecipeScriptComponent"
+            }
+        ]
+    }
+]

@@ -1,0 +1,14 @@
+:host{
+    margin-left: 30px;
+    padding-left: 24px;
+    border-left: solid 1px green;
+    display: block;
+}
+
+:host ul{
+    padding-left: 0px;
+}
+
+:host ul li{
+    padding: 5px 0px;
+}

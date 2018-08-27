@@ -10,6 +10,7 @@ export class DssPluginDirective {
   @Input() valueFields:Array<string>;
   @Input() filter:any;
   @Input() component:string;
+  @Input() module:string;
   @Output() values:EventEmitter<any> = new EventEmitter();
   constructor(private modeuleService:ModuleService, private viewRef:ViewContainerRef) { 
     
@@ -19,6 +20,11 @@ export class DssPluginDirective {
     if(this.component){
       this.type = 'component';
       this.valueFields = [this.component];
+    }
+
+    if(this.module){
+      this.filter = this.filter||{};
+      this.filter.type = this.module; 
     }
     //let v = this.modeuleService.getValue(this.valueField, this.filter);
     if(this.type=='component'){

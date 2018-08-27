@@ -1,11 +1,5 @@
-<div>
-  Main
-</div>
-<h5>创建组件：</h5>
-<div dssPlugin component="script" [filter]="{id:'JHGFDTYUIEJHYD'}"></div>
-<div dssPlugin component="script" [filter]="{'parameters.code':'anotherrecipe'}"></div>
-<h5>获取参数值：</h5>
-<div dssPlugin type="value" [valueFields]="['type','parameters.name','parameters.inputDataset']" 
-    (values)="values=$event" [filter]="{'parameters.code':'myrecipe'}">
-    {{values|json}}
-</div>
+<h1>Dynamic Angular App</h1>
+<button style="margin: 3px 10px" [routerLink]="['layout']">布局</button>
+<button style="margin: 3px 10px" [routerLink]="['config']">配置</button>
+<hr>
+<router-outlet></router-outlet>

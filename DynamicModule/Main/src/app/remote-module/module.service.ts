@@ -57,13 +57,24 @@ export class ModuleService {
     SystemJS.set('@clr/angular', SystemJS.newModule(AngularClarity));
 
     // now, import the new module
-    return SystemJS.import(`${url}`).then((module) => {
+    return this.loadModuleByLocationSystemJS(url).then((module) => {
       console.log(module);
       return this.compiler.compileModuleAndAllComponentsAsync(module[`${moduleInfo.moduleName}`]).then(compiled => {
         console.log(compiled);
         return compiled;
       });
     });
+  }
+
+  loadModuleByLocationSystemJS(location: string): Promise<any> {
+    let url = location;
+    SystemJS.set('@angular/core', SystemJS.newModule(AngularCore));
+    SystemJS.set('@angular/common', SystemJS.newModule(AngularCommon));
+    SystemJS.set('@angular/router', SystemJS.newModule(AngularRouter));
+    SystemJS.set('@angular/platform-browser/animations', SystemJS.newModule(BrowserAnimations));
+    SystemJS.set('@clr/angular', SystemJS.newModule(AngularClarity));
+
+    return SystemJS.import(`${url}`);
   }
 
   filterModule(filter:any):Array<ModuleData>{

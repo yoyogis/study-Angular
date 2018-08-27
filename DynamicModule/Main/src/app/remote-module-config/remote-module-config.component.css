@@ -1,0 +1,7 @@
+.moduleListItem:hover{
+    background-color: azure;
+}
+
+.moduleListItem.selected{
+    background-color: #365bd2;
+}
