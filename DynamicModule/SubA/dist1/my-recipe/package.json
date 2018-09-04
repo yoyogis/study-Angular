@@ -1,0 +1,21 @@
+{
+  "name": "my-recipe",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
+  },
+  "main": "bundles/my-recipe.umd.js",
+  "module": "fesm5/my-recipe.js",
+  "es2015": "fesm2015/my-recipe.js",
+  "esm5": "esm5/my-recipe.js",
+  "esm2015": "esm2015/my-recipe.js",
+  "fesm5": "fesm5/my-recipe.js",
+  "fesm2015": "fesm2015/my-recipe.js",
+  "typings": "my-recipe.d.ts",
+  "metadata": "my-recipe.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}

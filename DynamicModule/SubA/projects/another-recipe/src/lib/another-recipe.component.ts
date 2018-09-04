@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <p>
       another-recipe works!
+      <nz-tag>Tag 1</nz-tag>
+      123
     </p>
   `,
   styles: []

@@ -28,9 +28,9 @@ export class DssPluginDirective {
     }
     //let v = this.modeuleService.getValue(this.valueField, this.filter);
     if(this.type=='component'){
-      let v = this.modeuleService.getComponent(this.valueFields[0], this.filter);
-      if(v){
-          this.viewRef.createComponent(v);
+      let componentFactory = this.modeuleService.getComponent(this.valueFields[0], this.filter);
+      if(componentFactory){
+          this.viewRef.createComponent(componentFactory);
         }
     }else{
       let v = this.modeuleService.getValues(this.valueFields, this.filter);

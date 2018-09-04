@@ -8,7 +8,6 @@ import * as AngularCore from '@angular/core';
 import * as AngularCommon from '@angular/common';
 import * as AngularRouter from '@angular/router';
 import * as BrowserAnimations from '@angular/platform-browser/animations';
-import * as AngularClarity from '@clr/angular';
 
 declare var SystemJS: any;
 
@@ -50,11 +49,11 @@ export class ModuleService {
 
   loadModuleSystemJS(moduleInfo: ModuleData): Promise<any> {
     let url = moduleInfo.location;
+    debugger
     SystemJS.set('@angular/core', SystemJS.newModule(AngularCore));
     SystemJS.set('@angular/common', SystemJS.newModule(AngularCommon));
     SystemJS.set('@angular/router', SystemJS.newModule(AngularRouter));
     SystemJS.set('@angular/platform-browser/animations', SystemJS.newModule(BrowserAnimations));
-    SystemJS.set('@clr/angular', SystemJS.newModule(AngularClarity));
 
     // now, import the new module
     return this.loadModuleByLocationSystemJS(url).then((module) => {
@@ -68,12 +67,6 @@ export class ModuleService {
 
   loadModuleByLocationSystemJS(location: string): Promise<any> {
     let url = location;
-    SystemJS.set('@angular/core', SystemJS.newModule(AngularCore));
-    SystemJS.set('@angular/common', SystemJS.newModule(AngularCommon));
-    SystemJS.set('@angular/router', SystemJS.newModule(AngularRouter));
-    SystemJS.set('@angular/platform-browser/animations', SystemJS.newModule(BrowserAnimations));
-    SystemJS.set('@clr/angular', SystemJS.newModule(AngularClarity));
-
     return SystemJS.import(`${url}`);
   }
 

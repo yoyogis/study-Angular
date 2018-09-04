@@ -3,5 +3,6 @@
   "dest": "../../dist/another-recipe",
   "lib": {
     "entryFile": "src/public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": ["ng-zorro-antd"]
 }

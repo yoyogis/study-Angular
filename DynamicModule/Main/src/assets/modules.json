@@ -28,8 +28,8 @@
         {
             "id":"JHGFDTYUIEJHY1",
             "type":"Recipe",
-            "moduleName": "AnotherRecipeModule",
-            "location":"./ext/another-recipe.umd.js",
+            "moduleName": "ModuleCModule",
+            "location":"./ext/module-c-module-c-module.js",
             "parameters":{
                 "code":"anotherrecipe",
                 "name":"lib-AnotherRecipe",
