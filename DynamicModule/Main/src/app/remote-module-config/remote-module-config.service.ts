@@ -11,6 +11,12 @@ export class RemoteModuleConfigService {
 
   constructor(private http:Http) { }
 
+  createModuleType(moduleType):Observable<Array<any>>{
+    return this.http.post('/configapi/moduleTypes', moduleType).pipe(map(response=>{
+      return response.json();
+    }),tap(x=>this.popupSuccessMessage));
+  }
+
   getModuleTypes():Observable<Array<any>>{
     return this.http.get('/configapi/moduleTypes').pipe(map(response=>{
       return response.json();

@@ -1,6 +1,6 @@
 export interface ModuleData {
     id: string;
-    location: string;
+    module: string;
     moduleName: string;
     type: string;
     description: string;

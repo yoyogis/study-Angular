@@ -10,6 +10,7 @@ import zh from '@angular/common/locales/zh';
 import { RouterModule } from '@angular/router';
 import { ObjectEditorComponent } from './object-editor/object-editor.component';
 import { RemoteModuleModule } from '../remote-module/remote-module.module';
+import { CreateModuleTypeComponent } from './create-module-type/create-module-type.component';
 registerLocaleData(zh);
 
 @NgModule({
@@ -27,7 +28,7 @@ registerLocaleData(zh);
     HttpClientModule,
     RemoteModuleModule
   ],
-  declarations: [RemoteModuleConfigComponent, ObjectEditorComponent],
+  declarations: [RemoteModuleConfigComponent, ObjectEditorComponent, CreateModuleTypeComponent],
   providers   : [ { provide: NZ_I18N, useValue: zh_CN } ]
 })
 export class RemoteModuleConfigModule { }

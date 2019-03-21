@@ -12,15 +12,20 @@ export class RemoteModuleConfigComponent implements OnInit {
   moduleTypes: Array<any>;
   modules: Array<any>;
   selectedModule: any;
+  showCreateModuleType:boolean = false;
   constructor(private configService: RemoteModuleConfigService, private moduleService: ModuleService) { }
 
   ngOnInit() {
-    this.configService.getModuleTypes().subscribe(types => {
-      this.moduleTypes = types;
-    });
+    this.fetchModuleTypes();
 
     this.configService.getModules().subscribe(modules => {
       this.modules = modules;
+    });
+  }
+
+  fetchModuleTypes(){
+    this.configService.getModuleTypes().subscribe(types => {
+      this.moduleTypes = types;
     });
   }
 
@@ -116,5 +121,9 @@ export class RemoteModuleConfigComponent implements OnInit {
       }
     }
     return parameters;
+  }
+
+  createdModuleType(){
+    this.fetchModuleTypes();
   }
 }

@@ -1,54 +1,28 @@
 [
     {
-            "id":"JHGFDTYUIEJHYD",
-            "type":"Recipe",
-            "moduleName": "MyRecipeModule",
-            "location":"./ext/my-recipe.umd.js",
-            "parameters":{
-                "code":"myrecipe",
-                "name":"My Recipe",
-                "defaultIcon":"asset/myrecipe.svg",
-                "inputDataset":{
-                    "count":1
-                },
-                "outputDataset":{
-                    "count":1
-                },
-                "overview":"default",
-                "datasetIO":{
-                    "component":"default",
-                    "parameters":{
-                        "haveInputDataset":false
-                    }
-                },
-                "script":"lib-MyRecipe",
-                "advance":"default"
-            }
-        },
-        {
-            "id":"JHGFDTYUIEJHY1",
-            "type":"Recipe",
-            "moduleName": "ModuleCModule",
-            "location":"./ext/module-c-module-c-module.js",
-            "parameters":{
-                "code":"anotherrecipe",
-                "name":"lib-AnotherRecipe",
-                "defaultIcon":"asset/myrecipe.svg",
-                "inputDataset":{
-                    "count":1
-                },
-                "outputDataset":{
-                    "count":1
-                },
-                "overview":"default",
-                "datasetIO":{
-                    "component":"default",
-                    "parameters":{
-                        "haveInputDataset":false
-                    }
-                },
-                "script":"lib-AnotherRecipe"
-            }
+        "id":"JHGFDTYUIEJHYD",
+        "type":"Recipe",
+        "moduleName": "MyRecipeModule",
+        "location":"./ext/my-recipe.umd.js",
+        "parameters":{
+            "code":"myrecipe",
+            "name":"My Recipe",
+            "defaultIcon":"asset/myrecipe.svg",
+            "inputDataset":{
+                "count":1
+            },
+            "outputDataset":{
+                "count":1
+            },
+            "overview":"default",
+            "datasetIO":{
+                "component":"default",
+                "parameters":{
+                    "haveInputDataset":false
+                }
+            },
+            "script":"lib-MyRecipe",
+            "advance":"default"
         }
-    
+    }
 ]

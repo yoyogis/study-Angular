@@ -51,6 +51,19 @@ router.put('/modules/:id', function(req, res, next) {
   }
 });
 
+router.delete('/modules/:id', function(req, res, next) {
+  let moduleId = req.param("id");
+  console.log(moduleId);
+  let module = modules.get(moduleId);
+  console.log(module);
+  if(module){
+    modules.remove(module);
+    res.send(module);
+  }else{
+    res.status(404).send(`Not found module: ${moduleId}`);
+  }
+});
+
 function formatModules(modules){
   if(modules){
     return modules.map(module=>{

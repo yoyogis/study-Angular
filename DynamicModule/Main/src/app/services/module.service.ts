@@ -61,11 +61,16 @@ export class ModuleService {
         // now, import the new module
         return SystemJS.import(`${url}`).then((module) => {
             console.log(module);
-            return this.compiler.compileModuleAndAllComponentsAsync(module[`${moduleInfo.moduleName}`]).then(compiled => {
-                debugger
-                console.log(compiled);
-                return compiled;
-            });
+            let moduleToCompile = module[`${moduleInfo.moduleName}`];
+            if(moduleToCompile){
+                return this.compiler.compileModuleAndAllComponentsAsync(moduleToCompile).then(compiled => {
+                    debugger
+                    console.log(compiled);
+                    return compiled;
+                });
+            }else{
+                return Promise.reject(true);
+            }
         });
     }
 }

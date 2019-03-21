@@ -1,4 +1,4 @@
-import { Directive, Input, ViewContainerRef, Output, EventEmitter } from '@angular/core';
+import { Directive, Input, ViewContainerRef, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { ModuleService } from './module.service';
 
 @Directive({
@@ -9,32 +9,44 @@ export class DssPluginDirective {
   @Input() type:string;
   @Input() valueFields:Array<string>;
   @Input() filter:any;
-  @Input() component:string;
-  @Input() module:string;
+  @Input() attachPoint:string;
+  @Input() template:string;
+  @Input() data:any;
+  @Input() defaultComponent:any;
   @Output() values:EventEmitter<any> = new EventEmitter();
   constructor(private modeuleService:ModuleService, private viewRef:ViewContainerRef) { 
     
   }
 
   ngOnInit(){
-    if(this.component){
+    if(this.attachPoint){
       this.type = 'component';
-      this.valueFields = [this.component];
+      this.valueFields = [this.attachPoint];
     }
 
-    if(this.module){
+    if(this.template){
       this.filter = this.filter||{};
-      this.filter.type = this.module; 
+      this.filter.type = this.template; 
     }
     //let v = this.modeuleService.getValue(this.valueField, this.filter);
     if(this.type=='component'){
-      let componentFactory = this.modeuleService.getComponent(this.valueFields[0], this.filter);
+      let componentFactory = this.modeuleService.getComponent(this.attachPoint, this.template, this.data);
       if(componentFactory){
-          this.viewRef.createComponent(componentFactory);
-        }
+          this.viewRef.clear();
+          let componentRef = this.viewRef.createComponent(componentFactory);
+          componentRef.instance["data"] = this.data;
+      }else{
+        this.viewRef.createEmbeddedView(this.defaultComponent);
+      }
     }else{
       let v = this.modeuleService.getValues(this.valueFields, this.filter);
       this.values.emit(v)
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes.data){
+      
     }
   }
 }

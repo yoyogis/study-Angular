@@ -4,4 +4,14 @@
 
 .moduleListItem.selected{
     background-color: #365bd2;
+    color: white;
+}
+
+.moduleListItem {
+    line-height: 33px;
+    padding: 0px 15px;
+}
+
+[nz-button]{
+    margin-left:10px;
 }

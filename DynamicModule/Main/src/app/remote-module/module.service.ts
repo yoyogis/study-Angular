@@ -43,26 +43,35 @@ export class ModuleService {
   }
 
   fetchConfig(): Observable<any> {
-    return this.http.get("./assets/modules.json")
+    return this.http.get("/configapi/modules")
       .pipe(map(res => res.json()));
   }
 
   loadModuleSystemJS(moduleInfo: ModuleData): Promise<any> {
-    let url = moduleInfo.location;
-    debugger
-    SystemJS.set('@angular/core', SystemJS.newModule(AngularCore));
-    SystemJS.set('@angular/common', SystemJS.newModule(AngularCommon));
-    SystemJS.set('@angular/router', SystemJS.newModule(AngularRouter));
-    SystemJS.set('@angular/platform-browser/animations', SystemJS.newModule(BrowserAnimations));
+    let url = moduleInfo.module;
+    if(url){
+        SystemJS.set('@angular/core', SystemJS.newModule(AngularCore));
+        SystemJS.set('@angular/common', SystemJS.newModule(AngularCommon));
+        SystemJS.set('@angular/router', SystemJS.newModule(AngularRouter));
+        SystemJS.set('@angular/platform-browser/animations', SystemJS.newModule(BrowserAnimations));
 
-    // now, import the new module
-    return this.loadModuleByLocationSystemJS(url).then((module) => {
-      console.log(module);
-      return this.compiler.compileModuleAndAllComponentsAsync(module[`${moduleInfo.moduleName}`]).then(compiled => {
-        console.log(compiled);
-        return compiled;
+        // now, import the new module
+        return this.loadModuleByLocationSystemJS(url).then((module) => {
+          console.log(module);
+          let moduleToCompile = module[`${moduleInfo.moduleName}`];
+          if(moduleToCompile){
+            return this.compiler.compileModuleAndAllComponentsAsync(moduleToCompile).then(compiled => {
+              console.log(compiled);
+              return compiled;
+            });
+          }else{
+            return Promise.reject(false);
+          }
       });
-    });
+    }else{
+      return Promise.resolve(moduleInfo);
+    }
+    
   }
 
   loadModuleByLocationSystemJS(location: string): Promise<any> {
@@ -107,12 +116,32 @@ export class ModuleService {
     }
   }
 
-  getComponent(key:string, filter:any){
-    let v:ModuleData = this.filterModuleBestMatch(filter);
-    if(v){
-      let selectorName = v.parameters[key];
-      return v.compiled.componentFactories.filter(f=>f.selector===selectorName)[0];
+  getComponent(key:string, template:string, data:any){
+   return this.modules.filter(m=> m.type===template).map(v=>{
+      if(v){
+        let field = v.parameters[key];
+        if(field){
+          let condition = field.condition;
+          if(condition){
+            let access = this.safeEval(condition, data); 
+            if(access===true){
+              return v.compiled.componentFactories.filter(f=>f.componentType.name===field.value)[0];
+            }
+          }else{
+            return v.compiled.componentFactories.filter(f=>f.componentType.name===field.value)[0];
+          }
+        }
+      }
+    }).filter(c=>c)[0];
+  }
+
+  safeEval(code:string, data:any){
+    try {
+      return eval("(function(data){ return "+code+"})(data)");
+    } catch (error) {
+      return false;  
     }
+    
   }
 
   _getObjectValueByPath(obj:any, path:string){

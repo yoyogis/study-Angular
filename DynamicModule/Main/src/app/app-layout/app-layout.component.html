@@ -1,12 +1,24 @@
-<div>
+<!-- <div>
     Main
-  </div>
-  <h5>创建组件：</h5>
-  <div dssPlugin module="Recipe" component="script" [filter]="{id:'JHGFDTYUIEJHYD'}"></div>
-  <div dssPlugin module="Recipe" component="script"  [filter]="{'parameters.code':'anotherrecipe'}"></div>
-  <h5>获取参数值：</h5>
-  
-  <div dssPlugin type="value" [valueFields]="['type','parameters.name','parameters.inputDataset']" 
-      (values)="values=$event" [filter]="{'parameters.code':'myrecipe'}">
-      {{values|json}}
-  </div>
+</div>
+<h5>创建组件：</h5>
+<div dssPlugin module="Recipe" component="script" [filter]="{id:'JHGFDTYUIEJHYD'}"></div>
+<div dssPlugin module="Recipe" component="script"  [filter]="{'parameters.code':'anotherrecipe'}"></div>
+<h5>获取参数值：</h5>
+
+<div dssPlugin type="value" [valueFields]="['type','parameters.name','parameters.inputDataset']" 
+    (values)="values=$event" [filter]="{'parameters.code':'myrecipe'}">
+    {{values|json}}
+</div> -->
+
+
+<div>
+    <div *ngFor="let item of dataList" dssPlugin template="Students" attachPoint="nameCard" [data]="item" [defaultComponent]="defaultComponent">
+        <ng-template #defaultComponent>
+            <li>
+              <span>姓名：{{item.name}} </span>
+              <span>年龄：{{item.age}}</span>
+            </li>
+        </ng-template>
+    </div>
+</div>

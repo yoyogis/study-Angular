@@ -24,6 +24,7 @@
     "core-js": "^2.5.4",
     "ng-zorro-antd": "^1.4.0",
     "rxjs": "^6.0.0",
+    "safe-eval": "^0.4.1",
     "systemjs": "^0.21.4",
     "zone.js": "^0.8.26"
   },
