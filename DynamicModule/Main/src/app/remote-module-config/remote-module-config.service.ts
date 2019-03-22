@@ -41,6 +41,12 @@ export class RemoteModuleConfigService {
     }),tap(x=>this.popupSuccessMessage));
   }
 
+  deleteModule(moduleId):Observable<Array<any>>{
+    return this.http.delete(`/configapi/modules/${moduleId}`).pipe(map(response=>{
+      return response.json();
+    }),tap(x=>this.popupSuccessMessage));
+  }
+
   private popupSuccessMessage(){
     console.log("成功。。。");
   }

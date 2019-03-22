@@ -17,7 +17,10 @@ export class RemoteModuleConfigComponent implements OnInit {
 
   ngOnInit() {
     this.fetchModuleTypes();
+    this.fetchModules();
+  }
 
+  fetchModules(){
     this.configService.getModules().subscribe(modules => {
       this.modules = modules;
     });
@@ -125,5 +128,11 @@ export class RemoteModuleConfigComponent implements OnInit {
 
   createdModuleType(){
     this.fetchModuleTypes();
+  }
+
+  deleteModule(module){
+    this.configService.deleteModule(module.id).subscribe(()=>{
+      this.fetchModules();
+    });
   }
 }

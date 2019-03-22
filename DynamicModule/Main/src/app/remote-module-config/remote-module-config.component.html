@@ -6,11 +6,13 @@
     <div>
       <div class="moduleListItem" [ngClass]="{'selected':selectedModule&&selectedModule.id==module.id}" 
         *ngFor="let module of modules" (click)="selectModule(module.id)">
-        {{module.type}}#{{module.id}}
+        <span>{{module.type}}#{{module.id}}</span>
+        <button style="float: right;" nz-button (click)="deleteModule(module)">删除</button>
       </div>
+      
     </div>
   </div>
-  <div nz-col [nzSpan]="20">
+  <div nz-col [nzSpan]="20" style="padding:0px 10px">
         <div *ngIf="selectedModule" nz-col [nzSpan]="12">
           <label>选择模版</label> 
           
@@ -18,10 +20,10 @@
             <nz-option *ngFor="let type of moduleTypes" [nzValue]="type.id" [nzLabel]="type.id"></nz-option>
           </nz-select>
           <button style=" margin-left:10px" (click)="showCreateModuleType=true" nz-button nzType="primary">定义模版</button>
-          <div>
+          <div style="margin-top:5px">
             <input style="width:400px" nz-input [(ngModel)]="selectedModule.module" placeholder="输入编译之后模块的URL:assets/extmodules/JHGFDTYUIEJHYD/MyRecipe.umd.js">
             <button (click)="loadModule(selectedModule)" nz-button>加载</button>
-            <nz-select style="width:200px" style="width: 120px;" [(ngModel)]="selectedModule.moduleName" (ngModelChange)="compileComponents(selectedModule)">
+            <nz-select style="width:200px" [(ngModel)]="selectedModule.moduleName" (ngModelChange)="compileComponents(selectedModule)">
               <nz-option *ngFor="let loadedModule of selectedModule.loadedModules" [nzValue]="loadedModule.name" [nzLabel]="loadedModule.name"></nz-option>
             </nz-select>
           </div>
