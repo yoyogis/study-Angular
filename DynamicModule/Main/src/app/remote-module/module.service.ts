@@ -23,10 +23,10 @@ export class ModuleService {
   }
 
   public load(){
-    return this.loadModules();
+    return this.loadInstances();
   }
 
-  loadModules():Promise<boolean> {
+  loadInstances():Promise<boolean> {
     return new Promise(resolve=>{
       this.fetchConfig().pipe(map((modules: Array<ModuleData>) => {
         this.modules = modules;
@@ -43,18 +43,13 @@ export class ModuleService {
   }
 
   fetchConfig(): Observable<any> {
-    return this.http.get("/configapi/modules")
+    return this.http.get("/configapi/instances")
       .pipe(map(res => res.json()));
   }
 
   loadModuleSystemJS(moduleInfo: ModuleData): Promise<any> {
     let url = moduleInfo.module;
     if(url){
-        SystemJS.set('@angular/core', SystemJS.newModule(AngularCore));
-        SystemJS.set('@angular/common', SystemJS.newModule(AngularCommon));
-        SystemJS.set('@angular/router', SystemJS.newModule(AngularRouter));
-        SystemJS.set('@angular/platform-browser/animations', SystemJS.newModule(BrowserAnimations));
-
         // now, import the new module
         return this.loadModuleByLocationSystemJS(url).then((module) => {
           console.log(module);
@@ -75,6 +70,10 @@ export class ModuleService {
   }
 
   loadModuleByLocationSystemJS(location: string): Promise<any> {
+    SystemJS.set('@angular/core', SystemJS.newModule(AngularCore));
+    SystemJS.set('@angular/common', SystemJS.newModule(AngularCommon));
+    SystemJS.set('@angular/router', SystemJS.newModule(AngularRouter));
+    SystemJS.set('@angular/platform-browser/animations', SystemJS.newModule(BrowserAnimations));
     let url = location;
     return SystemJS.import(`${url}`);
   }
@@ -117,7 +116,7 @@ export class ModuleService {
   }
 
   getComponent(key:string, template:string, data:any){
-   return this.modules.filter(m=> m.type===template).map(v=>{
+   return this.modules.filter(m=> m.template===template).map(v=>{
       if(v){
         let field = v.parameters[key];
         if(field){

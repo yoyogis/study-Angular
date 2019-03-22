@@ -1,74 +1,74 @@
 var express = require('express');
 var loki = require('lokijs');
 var router = express.Router();
-var modules, moduleTypes;
+var instances, templates;
 var db = new loki('./config.json',{
   autoload: true,
 	autoloadCallback : ()=>{
-    modules = db.getCollection("modules");
-    if (modules === null) {
-      modules = db.addCollection("modules");
+    instances = db.getCollection("instances");
+    if (instances === null) {
+      instances = db.addCollection("instances");
     }
-    moduleTypes = db.getCollection("moduleTypes");
-    if (moduleTypes === null) {
-      moduleTypes = db.addCollection("moduleTypes");
+    templates = db.getCollection("templates");
+    if (templates === null) {
+      templates = db.addCollection("templates");
     }
-    moduleTypes.on('error',function(obj){
+    templates.on('error',function(obj){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
       console.log('error ... adding 1 to userID');
       console.error(obj);
       return null;
     });
-    moduleTypes.checkAllIndexes();
+    templates.checkAllIndexes();
   },
 	autosave: true, 
 	autosaveInterval: 1000
 });
 
-router.get('/modules', function(req, res, next) {
-  if(modules){
-    res.send(formatModules(modules.findObjects()));
+router.get('/instances', function(req, res, next) {
+  if(instances){
+    res.send(formatInstances(instances.findObjects()));
   }else{
     res.send([]);
   }
 });
 
-router.post('/modules', function(req, res, next) {
-  modules.insert(req.body);
-  res.send(formatModules(modules.findObjects()));
+router.post('/instances', function(req, res, next) {
+  instances.insert(req.body);
+  res.send(formatInstances(instances.findObjects()));
 });
 
-router.put('/modules/:id', function(req, res, next) {
+router.put('/instances/:id', function(req, res, next) {
   let moduleId = req.param("id");
   console.log(moduleId);
-  let module = modules.get(moduleId);
+  let module = instances.get(moduleId);
   console.log(module);
   if(module){
     Object.assign(module, req.body);
-    modules.update(module);
-    res.send(formatModules([module])[0]);
+    instances.update(module);
+    res.send(formatInstances([module])[0]);
   }else{
     res.status(404).send(`Not found module: ${moduleId}`);
   }
 });
 
-router.delete('/modules/:id', function(req, res, next) {
+router.delete('/instances/:id', function(req, res, next) {
   let moduleId = req.param("id");
   console.log(moduleId);
-  let module = modules.get(moduleId);
+  let module = instances.get(moduleId);
   console.log(module);
   if(module){
-    modules.remove(module);
+    instances.remove(module);
     res.send(module);
   }else{
     res.status(404).send(`Not found module: ${moduleId}`);
   }
 });
 
-function formatModules(modules){
-  if(modules){
-    return modules.map(module=>{
-      let result = Object.assign({}, module);
-      result.id = module.$loki;
+function formatInstances(instances){
+  if(instances){
+    return instances.map(instance=>{
+      let result = Object.assign({}, instance);
+      result.id = instance.$loki;
       delete result.$loki;
       delete result.meta;
       return result;
@@ -79,23 +79,23 @@ function formatModules(modules){
 }
 
 
-router.get('/moduleTypes', function(req, res, next) {
-  if(moduleTypes){
-    res.send(formatModuleTypes(moduleTypes.findObjects()));
+router.get('/templates', function(req, res, next) {
+  if(templates){
+    res.send(formatTemplates(templates.findObjects()));
   }else{
     res.send([]);
   }
 });
 
-router.post('/moduleTypes', function(req, res, next) {
+router.post('/templates', function(req, res, next) {
   let id = req.body.id;
   if(id){
-    if(moduleTypes.findObjects({id:id}).length){
+    if(templates.findObjects({id:id}).length){
       res.status(401).send(`已存在id为${id}的Module Type`);
     }else{
       console.log(req.body);
-      moduleTypes.insert(req.body);
-      res.send(formatModuleTypes(moduleTypes.findObjects()));
+      templates.insert(req.body);
+      res.send(formatTemplates(templates.findObjects()));
     }
     
   }else{
@@ -103,25 +103,25 @@ router.post('/moduleTypes', function(req, res, next) {
   }
 });
 
-router.put('/moduleTypes/:id', function(req, res, next) {
-  let moduleTypeId = req.param("id");
-  console.log(moduleTypeId);
-  let moduleType = moduleTypes.findObject({id:moduleTypeId});
-  console.log(moduleType);
-  if(moduleType){
+router.put('/templates/:id', function(req, res, next) {
+  let templateId = req.param("id");
+  console.log(templateId);
+  let template = templates.findObject({id:templateId});
+  console.log(template);
+  if(template){
     delete req.body.id;
-    Object.assign(moduleType, req.body);
-    console.log(moduleType);
-    moduleTypes.update(moduleType);
-    res.send(formatModuleTypes([moduleType])[0]);
+    Object.assign(template, req.body);
+    console.log(template);
+    templates.update(template);
+    res.send(formatTemplates([template])[0]);
   }else{
-    res.status(404).send(`Not found module: ${moduleTypeId}`);
+    res.status(404).send(`Not found template: ${templateId}`);
   }
 });
 
-function formatModuleTypes(types){
-  if(types){
-    return types.map(type=>{
+function formatTemplates(templates){
+  if(templates){
+    return templates.map(type=>{
       let result = {};
       Object.assign(result, type);
       delete result.$loki;

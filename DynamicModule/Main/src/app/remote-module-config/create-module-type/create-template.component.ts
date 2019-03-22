@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { RemoteModuleConfigService } from '../remote-module-config.service';
+import { ConfigService } from '../ConfigService';
 
 @Component({
-  selector: 'create-module-type',
-  templateUrl: './create-module-type.component.html',
-  styleUrls: ['./create-module-type.component.css']
+  selector: 'create-template',
+  templateUrl: './create-template.component.html',
+  styleUrls: ['./create-template.component.css']
 })
-export class CreateModuleTypeComponent implements OnInit {
+export class CreateTemplateComponent implements OnInit {
   @Input()
   show:boolean = false;
   @Output()
@@ -15,7 +15,7 @@ export class CreateModuleTypeComponent implements OnInit {
   onCreated:EventEmitter<boolean> = new EventEmitter();
   data:Array<any>;
   id:string;
-  constructor(private service: RemoteModuleConfigService) { }
+  constructor(private service: ConfigService) { }
 
   ngOnInit() {
     this.data = this.data||[];
@@ -37,7 +37,7 @@ export class CreateModuleTypeComponent implements OnInit {
       const item = this.data[i];
       data.parameters[item.name] = item.type;
     }
-    this.service.createModuleType(data).subscribe(()=>{
+    this.service.createTemplate(data).subscribe(()=>{
       this.show = false;
       this.showChange.emit(this.show);
       this.onCreated.emit(true);  

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RemoteModuleConfigService } from './remote-module-config.service';
+import { ConfigService } from './ConfigService';
 import { ModuleService } from '../remote-module/module.service';
 
 @Component({
@@ -9,52 +9,52 @@ import { ModuleService } from '../remote-module/module.service';
 })
 export class RemoteModuleConfigComponent implements OnInit {
 
-  moduleTypes: Array<any>;
-  modules: Array<any>;
-  selectedModule: any;
-  showCreateModuleType:boolean = false;
-  constructor(private configService: RemoteModuleConfigService, private moduleService: ModuleService) { }
+  templates: Array<any>;
+  instances: Array<any>;
+  selectedInstance: any;
+  showCreateTemplate:boolean = false;
+  constructor(private configService: ConfigService, private moduleService: ModuleService) { }
 
   ngOnInit() {
-    this.fetchModuleTypes();
-    this.fetchModules();
+    this.fetchTemplates();
+    this.fetchInstances();
   }
 
-  fetchModules(){
-    this.configService.getModules().subscribe(modules => {
-      this.modules = modules;
+  fetchInstances(){
+    this.configService.getInstances().subscribe(result => {
+      this.instances = result;
     });
   }
 
-  fetchModuleTypes(){
-    this.configService.getModuleTypes().subscribe(types => {
-      this.moduleTypes = types;
+  fetchTemplates(){
+    this.configService.getTemplates().subscribe(result => {
+      this.templates = result;
     });
   }
 
-  addModule() {
-    this.selectedModule = {};
+  addInstance() {
+    this.selectedInstance = {};
   }
 
   injectTypeIntoModule(module) {
-    let type: any = this.moduleTypes.filter(type => type.id === module.type)[0];
+    let type: any = this.templates.filter(type => type.id === module.template)[0];
     module.parameters = this.injectTypeIntoParameters(type.parameters, module.parameters);
   }
 
-  extractModule(module) {
+  extractInstance(instance) {
     let result: any = {
-      type: module.type, location: module.location, moduleName: module.moduleName
+      instance: instance.instance, location: instance.location, moduleName: instance.moduleName
     };
-    if (module.id) {
-      result.id = module.id;
+    if (instance.id) {
+      result.id = instance.id;
     }
-    result.parameters = this.extractParameters(module.parameters);
+    result.parameters = this.extractParameters(instance.parameters);
     return result;
   }
 
-  loadModule(module) {
-    this.moduleService.loadModuleByLocationSystemJS(module.module).then(loaded => {
-      module.loadedModules = Object.keys(loaded).filter(key => {
+  loadModule(instance) {
+    this.moduleService.loadModuleByLocationSystemJS(instance.module).then(loaded => {
+      instance.loadedModules = Object.keys(loaded).filter(key => {
         let value = loaded[key];
         return value.decorators.filter(decorator => decorator.type.prototype.ngMetadataName == "NgModule").length > 0;
       }).map(name => {
@@ -71,26 +71,31 @@ export class RemoteModuleConfigComponent implements OnInit {
     });
   }
 
-  getComponentsOfSelectedModule(module) {
-    if (module && module.loadedModules && module.moduleName) {
-      return module.loadedModules.filter(loadedModule => loadedModule.name == module.moduleName)[0].components;
+  getComponentsOfSelectedInstance(instance) {
+    if (instance && instance.loadedModules && instance.moduleName) {
+      return instance.loadedModules.filter(loadedModule => loadedModule.name == instance.moduleName)[0].components;
     } else {
       return [];
     }
   }
 
-  selectModule(moduleId) {
-    this.selectedModule = this.modules.filter(module => module.id === moduleId)[0];
+  selectInstance(moduleId) {
+    this.selectedInstance = this.instances.filter(module => module.id === moduleId)[0];
+    this.loadModule(this.selectedInstance);
   }
 
   submitChange() {
-    if (this.selectedModule.id) {
-      this.configService.updateModule(this.selectedModule).subscribe(() => {
-
+    let i:any = this.selectedInstance;
+    if(this.selectedInstance.loadedModules){
+      i = Object.assign({}, this.selectedInstance);
+      delete i.loadedModules;
+    }
+    if (this.selectedInstance.id) {
+        this.configService.updateInstance(i).subscribe(() => {
       });
     } else {
-      this.configService.createModule(this.selectedModule).subscribe(() => {
-        this.modules.push(this.selectedModule);
+      this.configService.createInstance(i).subscribe(() => {
+        this.instances.push(this.selectedInstance);
       });
     }
   }
@@ -126,13 +131,13 @@ export class RemoteModuleConfigComponent implements OnInit {
     return parameters;
   }
 
-  createdModuleType(){
-    this.fetchModuleTypes();
+  createdTemplate(){
+    this.fetchTemplates();
   }
 
-  deleteModule(module){
-    this.configService.deleteModule(module.id).subscribe(()=>{
-      this.fetchModules();
+  deleteInstance(instance){
+    this.configService.deleteInstance(instance.id).subscribe(()=>{
+      this.fetchInstances();
     });
   }
 }

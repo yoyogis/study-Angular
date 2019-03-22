@@ -1,40 +1,40 @@
 
-<create-module-type *ngIf="showCreateModuleType" [(show)]="showCreateModuleType" (onCreated)="createdModuleType()"></create-module-type>
-<button (click)="addModule()" nz-button>创建</button>
+<create-template *ngIf="showCreateTemplate" [(show)]="showCreateTemplate" (onCreated)="createdTemplate()"></create-template>
+<button (click)="addInstance()" nz-button>创建</button>
 <div nz-row>
   <div nz-col [nzSpan]="4">
     <div>
-      <div class="moduleListItem" [ngClass]="{'selected':selectedModule&&selectedModule.id==module.id}" 
-        *ngFor="let module of modules" (click)="selectModule(module.id)">
-        <span>{{module.type}}#{{module.id}}</span>
-        <button style="float: right;" nz-button (click)="deleteModule(module)">删除</button>
+      <div class="moduleListItem" [ngClass]="{'selected':selectedInstance&&selectedInstance.id==instance.id}" 
+        *ngFor="let instance of instances" (click)="selectInstance(instance.id)">
+        <span>{{instance.template}}#{{instance.id}}</span>
+        <button style="float: right;" nz-button (click)="deleteInstance(instance)">删除</button>
       </div>
       
     </div>
   </div>
   <div nz-col [nzSpan]="20" style="padding:0px 10px">
-        <div *ngIf="selectedModule" nz-col [nzSpan]="12">
+        <div *ngIf="selectedInstance" nz-col [nzSpan]="12">
           <label>选择模版</label> 
           
-          <nz-select style="width: 120px; margin-left:10px" [(ngModel)]="selectedModule.type" (ngModelChange)="injectTypeIntoModule(selectedModule)">
-            <nz-option *ngFor="let type of moduleTypes" [nzValue]="type.id" [nzLabel]="type.id"></nz-option>
+          <nz-select style="width: 120px; margin-left:10px" [(ngModel)]="selectedInstance.template" (ngModelChange)="injectTypeIntoModule(selectedInstance)">
+            <nz-option *ngFor="let template of templates" [nzValue]="template.id" [nzLabel]="template.id"></nz-option>
           </nz-select>
-          <button style=" margin-left:10px" (click)="showCreateModuleType=true" nz-button nzType="primary">定义模版</button>
+          <button style=" margin-left:10px" (click)="showCreateTemplate=true" nz-button nzType="primary">定义模版</button>
           <div style="margin-top:5px">
-            <input style="width:400px" nz-input [(ngModel)]="selectedModule.module" placeholder="输入编译之后模块的URL:assets/extmodules/JHGFDTYUIEJHYD/MyRecipe.umd.js">
-            <button (click)="loadModule(selectedModule)" nz-button>加载</button>
-            <nz-select style="width:200px" [(ngModel)]="selectedModule.moduleName" (ngModelChange)="compileComponents(selectedModule)">
-              <nz-option *ngFor="let loadedModule of selectedModule.loadedModules" [nzValue]="loadedModule.name" [nzLabel]="loadedModule.name"></nz-option>
+            <input style="width:400px" nz-input [(ngModel)]="selectedInstance.module" placeholder="输入编译之后模块的URL:assets/extmodules/JHGFDTYUIEJHYD/MyRecipe.umd.js">
+            <button (click)="loadModule(selectedInstance)" nz-button>加载</button>
+            <nz-select style="width:200px" [(ngModel)]="selectedInstance.moduleName" (ngModelChange)="compileComponents(selectedInstance)">
+              <nz-option *ngFor="let loadedModule of selectedInstance.loadedModules" [nzValue]="loadedModule.name" [nzLabel]="loadedModule.name"></nz-option>
             </nz-select>
           </div>
           <div>
             <label>参数：</label>
-            <object-editor [parameters]="selectedModule.parameters" [components]="getComponentsOfSelectedModule(selectedModule)"></object-editor>
+            <object-editor [parameters]="selectedInstance.parameters" [components]="getComponentsOfSelectedInstance(selectedInstance)"></object-editor>
           </div>
           <button (click)="submitChange()">确定</button>
         </div>
-        <pre *ngIf="selectedModule" nz-col [nzSpan]="12">
-            {{extractModule(selectedModule) | json}}
+        <pre *ngIf="selectedInstance" nz-col [nzSpan]="12">
+            {{extractInstance(selectedInstance) | json}}
         </pre>
   </div>
 </div>
