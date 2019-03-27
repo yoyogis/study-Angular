@@ -31,4 +31,9 @@ export class AppLayoutComponent implements OnInit {
     ]
   }
 
+  testClick(evt){
+    console.log(evt);
+    
+  }
+
 }

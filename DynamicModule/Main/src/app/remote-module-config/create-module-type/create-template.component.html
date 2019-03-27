@@ -1,14 +1,17 @@
 <nz-modal [(nzVisible)]="show" nzTitle="定义模版" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-  <label>ID:<input nz-input style="margin-left: 10px; width: 200px" [(ngModel)]="id"></label>
-  <button (click)="addParameter()" nz-button nzType="primary">添加参数</button>
+  <label>模版名:<input nz-input style="margin-left: 10px; width: 200px" [(ngModel)]="id"></label>
+  <div>
+      <button style="margin: 10px" (click)="addParameter()" nz-button nzType="primary">添加 Attach Point</button>
+  </div>
+  
   <div *ngFor="let item of data">
     <input nz-input style="margin-left: 10px; width: 200px" placeholder="输入参数名" [(ngModel)]="item.name">
-    
+<!--     
     <nz-select style="margin: 5px; width: 120px;" [(ngModel)]="item.type" nzAllowClear nzPlaceHolder="选择参数类型">
       <nz-option nzValue="component" nzLabel="组件"></nz-option>
       <nz-option nzValue="string" nzLabel="字符串"></nz-option>
       <nz-option nzValue="number" nzLabel="数值"></nz-option>
       <nz-option nzValue="boolean" nzLabel="Boolean"></nz-option>
-    </nz-select>
+    </nz-select> -->
   </div>
 </nz-modal>

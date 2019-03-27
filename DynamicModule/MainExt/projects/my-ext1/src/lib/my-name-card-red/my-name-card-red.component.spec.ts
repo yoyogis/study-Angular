@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ObjectEditorComponent } from './object-editor.component';
+import { MyNameCardRedComponent } from './my-name-card-red.component';
 
-describe('ObjectEditorComponent', () => {
-  let component: ObjectEditorComponent;
-  let fixture: ComponentFixture<ObjectEditorComponent>;
+describe('MyNameCardRedComponent', () => {
+  let component: MyNameCardRedComponent;
+  let fixture: ComponentFixture<MyNameCardRedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ObjectEditorComponent ]
+      declarations: [ MyNameCardRedComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ObjectEditorComponent);
+    fixture = TestBed.createComponent(MyNameCardRedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -35,7 +35,7 @@ export class CreateTemplateComponent implements OnInit {
     }
     for (let i = 0; i < this.data.length; i++) {
       const item = this.data[i];
-      data.parameters[item.name] = item.type;
+      data.parameters[item.name] = item.type||"component";
     }
     this.service.createTemplate(data).subscribe(()=>{
       this.show = false;
@@ -47,7 +47,7 @@ export class CreateTemplateComponent implements OnInit {
   addParameter(){
     this.data.push({
       name:"",
-      value:""
+      type:""
     });
   }
 }

@@ -1,6 +1,7 @@
 
+<h1>配置组件</h1>
 <create-template *ngIf="showCreateTemplate" [(show)]="showCreateTemplate" (onCreated)="createdTemplate()"></create-template>
-<button (click)="addInstance()" nz-button>创建</button>
+<button (click)="addInstance()" nz-button>创建组件</button>
 <div nz-row>
   <div nz-col [nzSpan]="4">
     <div>
@@ -19,16 +20,20 @@
           <nz-select style="width: 120px; margin-left:10px" [(ngModel)]="selectedInstance.template" (ngModelChange)="injectTypeIntoModule(selectedInstance)">
             <nz-option *ngFor="let template of templates" [nzValue]="template.id" [nzLabel]="template.id"></nz-option>
           </nz-select>
-          <button style=" margin-left:10px" (click)="showCreateTemplate=true" nz-button nzType="primary">定义模版</button>
+          <button style=" margin-left:10px" (click)="showCreateTemplate=true" nz-button nzType="primary">创建模版</button>
           <div style="margin-top:5px">
-            <input style="width:400px" nz-input [(ngModel)]="selectedInstance.module" placeholder="输入编译之后模块的URL:assets/extmodules/JHGFDTYUIEJHYD/MyRecipe.umd.js">
+            <label>远程模块</label>
+            <input style="width:400px;margin-left:10px" nz-input [(ngModel)]="selectedInstance.module" placeholder="输入编译之后模块的URL:assets/extmodules/JHGFDTYUIEJHYD/MyRecipe.umd.js">
             <button (click)="loadModule(selectedInstance)" nz-button>加载</button>
-            <nz-select style="width:200px" [(ngModel)]="selectedInstance.moduleName" (ngModelChange)="compileComponents(selectedInstance)">
-              <nz-option *ngFor="let loadedModule of selectedInstance.loadedModules" [nzValue]="loadedModule.name" [nzLabel]="loadedModule.name"></nz-option>
-            </nz-select>
+            <div style="margin:10px 0px">
+              <label>模块列表</label>
+              <nz-select style="width:200px;margin-left:10px" [(ngModel)]="selectedInstance.moduleName" (ngModelChange)="compileComponents(selectedInstance)">
+                <nz-option *ngFor="let loadedModule of selectedInstance.loadedModules" [nzValue]="loadedModule.name" [nzLabel]="loadedModule.name"></nz-option>
+              </nz-select>
+          </div>
           </div>
           <div>
-            <label>参数：</label>
+            <label>Attach Points：</label>
             <object-editor [parameters]="selectedInstance.parameters" [components]="getComponentsOfSelectedInstance(selectedInstance)"></object-editor>
           </div>
           <button (click)="submitChange()">确定</button>

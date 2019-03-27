@@ -7,7 +7,7 @@
                         <nz-select style="width: 220px;" [(ngModel)]="item.value.value" placeholder="请选择组件">
                             <nz-option *ngFor="let item of components"  [nzValue]="item" [nzLabel]="item"></nz-option>
                         </nz-select>
-                        <input style="width: 200px; margin-left: 10px;" nz-input placeholder="输入执行条件; 返回bool值" [(ngModel)]="item.value.condition">
+                        <input style="width: 200px; margin-left: 10px;" nz-input placeholder="输入渲染条件，bool表达式" [(ngModel)]="item.value.condition">
                     </span>
                     <span *ngSwitchCase="'boolean'">
                         <nz-select style="width: 120px;" [(ngModel)]="item.value.value" placeholder="请选择">

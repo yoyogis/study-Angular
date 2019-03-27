@@ -43,7 +43,7 @@ export class RemoteModuleConfigComponent implements OnInit {
 
   extractInstance(instance) {
     let result: any = {
-      instance: instance.instance, location: instance.location, moduleName: instance.moduleName
+      template: instance.template, location: instance.module, moduleName: instance.moduleName
     };
     if (instance.id) {
       result.id = instance.id;
@@ -68,6 +68,9 @@ export class RemoteModuleConfigComponent implements OnInit {
           components: components
         }
       });
+      if(!instance.moduleName&&instance.loadedModules.length){
+        instance.moduleName = instance.loadedModules[0].name;
+      }
     });
   }
 

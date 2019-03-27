@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AppLayoutComponent } from './app-layout.component';
+import { MyExt1Component } from './my-ext1.component';
 
-describe('AppLayoutComponent', () => {
-  let component: AppLayoutComponent;
-  let fixture: ComponentFixture<AppLayoutComponent>;
+describe('MyExt1Component', () => {
+  let component: MyExt1Component;
+  let fixture: ComponentFixture<MyExt1Component>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppLayoutComponent ]
+      declarations: [ MyExt1Component ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppLayoutComponent);
+    fixture = TestBed.createComponent(MyExt1Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

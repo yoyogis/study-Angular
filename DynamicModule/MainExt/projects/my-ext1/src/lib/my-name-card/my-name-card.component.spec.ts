@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateTemplateComponent } from './create-template.component';
+import { MyNameCardComponent } from './my-name-card.component';
 
-describe('CreateModuleTypeComponent', () => {
-  let component: CreateTemplateComponent;
-  let fixture: ComponentFixture<CreateTemplateComponent>;
+describe('MyNameCardComponent', () => {
+  let component: MyNameCardComponent;
+  let fixture: ComponentFixture<MyNameCardComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateTemplateComponent ]
+      declarations: [ MyNameCardComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateTemplateComponent);
+    fixture = TestBed.createComponent(MyNameCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

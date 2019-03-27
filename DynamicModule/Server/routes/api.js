@@ -119,6 +119,20 @@ router.put('/templates/:id', function(req, res, next) {
   }
 });
 
+
+router.delete('/templates/:id', function(req, res, next) {
+  let templateId = req.param("id");
+  console.log(templateId);
+  let template = templates.findObject({id:templateId});
+  console.log(template);
+  if(template){
+    templates.remove(template);
+    res.send(formatTemplates([template])[0]);
+  }else{
+    res.status(404).send(`Not found template: ${templateId}`);
+  }
+});
+
 function formatTemplates(templates){
   if(templates){
     return templates.map(type=>{

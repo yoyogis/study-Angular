@@ -24,6 +24,12 @@
       ],
       "test1/*": [
         "dist/test1/*"
+      ],
+      "my-ext1": [
+        "dist/my-ext1"
+      ],
+      "my-ext1/*": [
+        "dist/my-ext1/*"
       ]
     }
   }
